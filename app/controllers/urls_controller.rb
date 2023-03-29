@@ -7,6 +7,11 @@ class UrlsController < ApplicationController
     @url = Url.find_by(short: params[:id]) 
   end
 
+  def redirect
+    @url = Url.find_by(short: params[:short])
+    redirect_to @url.target, allow_other_host: true
+  end
+
   # GET /urls/new
   def new
     @urls = Url.all

@@ -3,5 +3,6 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root 'urls#new'
+  get '/:short', to: 'urls#redirect'
   resources :urls, only: [:create, :show, :new]
 end
