@@ -20,13 +20,14 @@ class UrlsController < ApplicationController
 
   # POST /urls
   def create
+    @urls = Url.all
     @url = Url.new(url_params)
     @url.short = generate_short_url
 
     if @url.save
       redirect_to @url
     else
-      render json: @url.errors, status: :unprocessable_entity
+      render :new, status: :unprocessable_entity
     end
   end
 

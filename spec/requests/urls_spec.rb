@@ -62,7 +62,7 @@ RSpec.describe UrlsController, type: :request do
       it 'renders the new template with errors' do
         post '/urls', params: params
         expect(response).to render_template(:new)
-        expect(response.body).to include("Target can't be blank")
+        expect(response.body).to include('Please enter a URL')
       end
     end
   end

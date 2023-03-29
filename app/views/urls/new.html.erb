@@ -4,6 +4,9 @@
   <div>
     <%= form.label :target %><br>
     <%= form.text_field :target %>
+    <% @url.errors.full_messages_for(:target).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
   </div>
 
   <div>
@@ -12,7 +15,7 @@
 <% end %>
 
 <ul>
-  <% @urls.each do |url| %>
+  <% @urls&.each do |url| %>
     <li>
       <%= link_to url.short, url%>
     </li>
