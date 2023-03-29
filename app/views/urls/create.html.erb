@@ -1,0 +1,10 @@
+<h1>URL Shortener</h1>
+
+<ul>
+  <% @urls.each do |url| %>
+    <li>
+      <%= url.title %>
+      <%= url.target %>
+    </li>
+  <% end %>
+</ul>
