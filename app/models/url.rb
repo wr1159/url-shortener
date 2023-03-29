@@ -6,7 +6,7 @@
 class Url < ApplicationRecord
 
   # Validations
-  validates :target, presence: true, format: { with: URI.regexp(%w[http https]), message: 'must be a valid URL' }
+  validates :target, presence: true, format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https]), message: 'must be a valid URL' }
   validates :short, presence: true, uniqueness: true
   before_validation :normalize_target
 
