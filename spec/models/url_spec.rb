@@ -5,10 +5,12 @@ RSpec.describe Url, type: :model do
     it { is_expected.to validate_presence_of(:target) }
     it { is_expected.to validate_presence_of(:short) }
     it { is_expected.to validate_uniqueness_of(:short) }
+    it { is_expected.to validate_presence_of(:title) }
     it 'validates that target is a valid URL' do
       should allow_value('http://example.com').for(:target)
       should allow_value('https://example.com').for(:target)
       should_not allow_value('invalid-url').for(:target)
+      should_not allow_value('http:/example.com').for(:target)
     end
   end
 
@@ -16,9 +18,9 @@ RSpec.describe Url, type: :model do
     context 'when target starts with www' do
       let(:url) { Url.new(target: 'www.example.com') }
 
-      it 'prepends http://' do
+      it 'prepends https://' do
         url.valid?
-        expect(url.target).to eq('http://www.example.com')
+        expect(url.target).to eq('https://www.example.com')
       end
     end
 
@@ -34,7 +36,7 @@ RSpec.describe Url, type: :model do
     context 'when target already has https://' do
       let(:url) { Url.new(target: 'https://www.example.com') }
 
-      it 'does not prepend http://' do
+      it 'does not prepend https://' do
         url.valid?
         expect(url.target).to eq('https://www.example.com')
       end
