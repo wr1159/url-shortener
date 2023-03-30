@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'net/http'
+require 'nokogiri'
 # Represents a URL that can be shortened to a unique, randomly generated identifier.
 # Public methods:
 # - to_param: Returns short attribute as the parameter for url
@@ -29,13 +30,18 @@ class Url < ApplicationRecord
   end
 
   def validate_target_url
-    return errors.add(:target, 'is not valid URL') unless target =~ /\A(https?):\/\/[^\s\/$.?#].[^\s]*\z/i
+    return errors.add(:target, 'might not have www. or a missing /') unless target =~ /\A(https?):\/\/[^\s\/$.?#].[^\s]*\z/i
 
     uri = URI.parse(target)
-    response = Net::HTTP.get_response(uri)
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    # response = Net::HTTP.get_response(uri)
+    response = http.get_response(uri)
     # Loop to account for redirecting websites
     loop do
-      response = Net::HTTP.get_response(uri) 
+      # response = Net::HTTP.get_response(uri) 
+      response = http.get_response(uri)
       # If it's a redirect, update the URI and try again
       if response.is_a?(Net::HTTPRedirection)
         uri = URI.parse(response['location'])
@@ -44,7 +50,9 @@ class Url < ApplicationRecord
       end
     end
     if response.is_a?(Net::HTTPSuccess)
-      self.title = response.body.match(/<title>(.*?)<\/title>/)[1]
+      html_doc = Nokogiri::HTML(response.body)
+      title = html_doc.at_css('title').text.strip
+      self.title = title.present? ? title : uri.host
     else
       errors.add(:target, 'is not valid target')
     end
