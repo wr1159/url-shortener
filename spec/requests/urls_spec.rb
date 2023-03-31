@@ -72,5 +72,11 @@ RSpec.describe UrlsController, type: :request do
     it 'increments the count' do
       expect { get "/#{url.short}" }.to change { url.reload.count }.by(1)
     end
+
+    it 'creates a new UrlVisit object when a redirect happens' do
+      expect {
+        get "/#{url.short}"
+      }.to change { url.url_visits.count }.by(1)
+    end
   end
 end
