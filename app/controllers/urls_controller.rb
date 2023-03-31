@@ -9,6 +9,8 @@ class UrlsController < ApplicationController
 
   def redirect
     @url = Url.find_by(short: params[:short])
+    @url.count += 1
+    @url.save
     redirect_to @url.target, allow_other_host: true
   end
 
