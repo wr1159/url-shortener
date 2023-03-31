@@ -4,5 +4,17 @@
   <% else %>
     <strong>Unknown</strong>
   <% end %>
-  <%= url_visit.created_at %>
+  <p data-timestamp="<%= url_visit.created_at.utc.to_i %>" >
+    <%= url_visit.created_at %>
+  </p>
 </p>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var timestamps = document.querySelectorAll('[data-timestamp]');
+    timestamps.forEach(function(timestamp) {
+      var utcTimestamp = parseInt(timestamp.dataset.timestamp);
+      var localTimestamp = moment.utc(utcTimestamp * 1000).local().format('YYYY-MM-DD HH:mm:ss');
+      timestamp.textContent = localTimestamp;
+    });
+  });
+</script>
