@@ -66,4 +66,11 @@ RSpec.describe UrlsController, type: :request do
       end
     end
   end
+
+  describe 'GET /:short' do
+    let(:url) { Url.create(target: 'https://example.com', short: 'example') }
+    it 'increments the count' do
+      expect { get "/#{url.short}" }.to change { url.reload.count }.by(1)
+    end
+  end
 end
