@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'geocoder'
 # Controller for managing URL shortening
 class UrlsController < ApplicationController
   # GET /urls/#short
@@ -11,6 +12,14 @@ class UrlsController < ApplicationController
     @url = Url.find_by(short: params[:short])
     @url.count += 1
     @url.save
+    country = request.location.country
+    city = request.location.city
+    # country = 'Unknown' if country.nil?
+    # city = 'Unknown' if city.nil?
+
+    # # Create a new UrlVisit object with the country and city @url.url_visits.create(country: country, city: city)
+    @url.url_visits.create(country: country, city: city)
+
     redirect_to @url.target, allow_other_host: true
   end
 

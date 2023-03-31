@@ -1,0 +1,8 @@
+<p>
+ <% if url_visit.city.present? && url_visit.country.present? %>
+    <strong><%= url_visit.city %>, <%= url_visit.country %></strong>
+  <% else %>
+    <strong>Unknown</strong>
+  <% end %>
+  <%= url_visit.created_at %>
+</p>
