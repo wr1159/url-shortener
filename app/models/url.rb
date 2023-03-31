@@ -8,6 +8,7 @@ require 'nokogiri'
 # - normalize_target: Adds https:// to target if not present and contains www.
 # - validate_target_url: Ensures that link is valid by getting the title tag using regex
 class Url < ApplicationRecord
+  has_many :url_visits
 
   # Validations
   validates :target, presence: true, format: {  with: /\A(https?):\/\/[^\s\/$.?#].[^\s]*\z/i, message: 'must be a valid URL' }
