@@ -33,15 +33,15 @@ class Url < ApplicationRecord
     return errors.add(:target, 'might not have www. or a missing /') unless target =~ /\A(https?):\/\/[^\s\/$.?#].[^\s]*\z/i
 
     uri = URI.parse(target)
-    http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true
-    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-    # response = Net::HTTP.get_response(uri)
-    response = http.get_response(uri)
+    begin
+      response = Net::HTTP.get_response(uri)
+    rescue OpenSSL::SSL::SSLError => e
+      self.title = "Unknown"
+      return
+    end
     # Loop to account for redirecting websites
     loop do
-      # response = Net::HTTP.get_response(uri) 
-      response = http.get_response(uri)
+      response = Net::HTTP.get_response(uri) 
       # If it's a redirect, update the URI and try again
       if response.is_a?(Net::HTTPRedirection)
         uri = URI.parse(response['location'])
