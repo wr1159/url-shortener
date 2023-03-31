@@ -14,6 +14,7 @@ class Url < ApplicationRecord
   validate :validate_target_url
   validates :short, presence: true, uniqueness: true
   validates :title, presence: true
+  validates :count, presence: true
   before_validation :normalize_target
 
   # Returns short attribute as the parameter for url

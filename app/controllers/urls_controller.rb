@@ -35,7 +35,7 @@ class UrlsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def url_params
-    params.require(:url).permit(:target, :title, :short)
+    params.require(:url).permit(:target, :title, :short, :count)
   end
 
   # Generate a random string of 7 characters
