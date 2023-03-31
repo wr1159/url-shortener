@@ -19,5 +19,10 @@
     <li>
       <%= link_to url.short, url%>
     </li>
+    <li>
+      <a href="<%= "#{request.base_url}/#{url.short}" %>"%>
+        <%= "#{request.base_url}/#{url.short}" %>
+      </a>
+    </li>
   <% end %>
 </ul>
