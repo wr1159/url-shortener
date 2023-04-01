@@ -61,4 +61,5 @@ production:
   database: <%= ENV["PGDATABASE"] %>
   username: <%= ENV["PGUSER"] %>
   password: <%= ENV["PGPASSWORD"] %>
+  port: <%= ENV["PGPORT"] %>
   timeout: 5000
