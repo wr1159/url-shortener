@@ -1,16 +1,16 @@
 <div class="flex flex-col item-center justify-center m-auto">
-  <div class="grid grid-cols-2 gap-4 shadow-md bg-white rounded-lg w-auto mb-8">
+  <div class="grid grid-cols-2 gap-4 shadow-md bg-white rounded-lg mb-8">
     <div class="p-4">
       <p class="text-lg font-bold mb-2">Short URL:</p>
-      <div class="flex item-center mb-4">
-        <p class="text-gray-600"><%= @url.short %></p>
-        <button class="ml-2 bg-gray-200 text-gray-700 rounded-md px-2 hover:bg-gray-300 clipboard-button" data-clipboard-text="<%= @url.short %>">
+      <div class="flex item-center mb-4 justify-between">
+        <a class="text-gray-600 py-0.5 hover:text-gray-400" href="<%= "#{request.base_url}/#{@url.short}" %>" ><%="#{request.base_url}/#{@url.short}" %></a>
+        <button class="ml-2 bg-gray-200 text-gray-700 rounded-md px-2 py-0.5 hover:bg-gray-300 clipboard-button" data-clipboard-text="<%= @url.short %>">
           Copy
         </button>
       </div>
 
       <p class="text-lg font-bold mb-2">Target URL:</p>
-      <p class="text-gray-600 mb-4"><%= @url.target %></p>
+      <a class="text-gray-600 mb-4 break-words hover:text-gray-400" href=<%= @url.target %>><%= @url.target %></a>
     </div>
     <div class="p-4">
       <p class="text-lg font-bold mb-2">Title:</p>
