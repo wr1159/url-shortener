@@ -45,11 +45,13 @@ rspec
 ```
 
 ## Dependencies 
-* Rails 7.0
-* [TailwindCSS](https://tailwindcss.com/docs/guides/ruby-on-rails)
+* Rails >= 7.0
+* [TailwindCSS >= 2.0](https://tailwindcss.com/docs/guides/ruby-on-rails)
 * [PostgreSQL](https://medium.com/geekculture/ruby-on-rails-switch-from-sqlite3-to-postgres-590009645c25)
 * Geocoder 
 * Nokogiri
+* RSpec-rails
+* Shoulda-matchers 
 
 ## Database creation
 Run the following
@@ -60,7 +62,7 @@ rake db:migrate
 ## Deployment instructions
 Deploy to Railway by signing up and initialise a PostgreSQL item and add your repo onto the application. Add the Environment variables from the PostgreSQL object. 
 
-These include 
+This includes
 * DATABASE_URL
 * PGDATABASE 
 * PGPASSWORD
