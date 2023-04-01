@@ -2,8 +2,13 @@
 
 ## This is a simple URL shortener application built using Ruby on Rails.
 
+## Deployed URL
+Deployed to [https://shorten-your-url.up.railway.app/](https://shorten-your-url.up.railway.app/)
+
 ## Installation
-To install and run this application on your local machine, you must have Ruby 3.0 or higher and Rails 7.0 or higher installed. You can check if you have Ruby installed by running the following command in your terminal:
+To install and run this application on your local machine, you must have Ruby 3.0 or higher and Rails 7.0 or higher installed. You can check if you have Ruby installed by running the following command in your terminal: 
+<br>
+Other versions might work but have yet to be tested.
 
 ```
 ruby -v
@@ -34,17 +39,17 @@ rails server
 ## Testing
 Testing was performed with rspec.
 
-run the tests by running the command
+Run the tests by running the command
 ```
 rspec
 ```
 
 ## Dependencies 
-Rails 7.0
-[TailwindCSS](https://tailwindcss.com/docs/guides/ruby-on-rails)
-[PostgreSQL](https://medium.com/geekculture/ruby-on-rails-switch-from-sqlite3-to-postgres-590009645c25)
-Geocoder 
-Nokogiri
+* Rails 7.0
+* [TailwindCSS](https://tailwindcss.com/docs/guides/ruby-on-rails)
+* [PostgreSQL](https://medium.com/geekculture/ruby-on-rails-switch-from-sqlite3-to-postgres-590009645c25)
+* Geocoder 
+* Nokogiri
 
 ## Database creation
 Run the following
@@ -52,7 +57,7 @@ Run the following
 rake db:migrate
 ```
 
-* Deployment instructions
+Deployment instructions
 Deploy to Railway by signing up and initialise a PostgreSQL item and add your repo onto the application. Add the Environment variables from the PostgreSQL object. 
 
 Go to config/environments/production.db 
