@@ -1,20 +1,16 @@
-<p>
- <% if url_visit.city.present? && url_visit.country.present? %>
-    <strong><%= url_visit.city %>, <%= url_visit.country %></strong>
-  <% else %>
-    <strong>Unknown</strong>
-  <% end %>
-  <p data-timestamp="<%= url_visit.created_at.utc.to_i %>" >
-    <%= url_visit.created_at %>
+<div class = "p-4 bg-white rounded-lg shadow-md mb-4">
+  <div class="flex items-center space-x-2">
+    <% if url_visit.country.present? %>
+      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+        <%= url_visit.city.present? ? "#{url_visit.city}, #{url_visit.country}" : url_visit.country %>
+      </span>
+    <% else %>
+      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+        Unknown
+      </span>
+    <% end %>
+  </div>
+  <p class="text-sm text-gray-500 mb-2">
+    <%= url_visit.created_at.in_time_zone().strftime("%b %d, %Y %l:%M %p") %>
   </p>
-</p>
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var timestamps = document.querySelectorAll('[data-timestamp]');
-    timestamps.forEach(function(timestamp) {
-      var utcTimestamp = parseInt(timestamp.dataset.timestamp);
-      var localTimestamp = moment.utc(utcTimestamp * 1000).local().format('YYYY-MM-DD HH:mm:ss');
-      timestamp.textContent = localTimestamp;
-    });
-  });
-</script>
+</div>
