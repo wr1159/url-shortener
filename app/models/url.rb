@@ -37,8 +37,8 @@ class Url < ApplicationRecord
     uri = URI.parse(target)
     begin
       response = Net::HTTP.get_response(uri)
-    rescue OpenSSL::SSL::SSLError => e
-      self.title = "Unknown"
+    rescue StandardError => e
+      self.title = uri.host
       return
     end
     # Loop to account for redirecting websites
@@ -53,10 +53,11 @@ class Url < ApplicationRecord
     end
     if response.is_a?(Net::HTTPSuccess)
       html_doc = Nokogiri::HTML(response.body)
-      title = html_doc.at_css('title').text.strip
-      self.title = title.present? ? title : uri.host
+      title_element = html_doc.at_css('title')
+      title = title_element ? html_doc.at_css('title').text.strip : uri.host
+      self.title = title
     else
-      errors.add(:target, 'is not valid target')
+      self.title = uri.host
     end
   end
 end
