@@ -32,3 +32,16 @@
     <% end %>
   </div>
 </div>
+
+<script>
+  document.querySelectorAll('[data-clipboard-text]').forEach(button => {
+    button.addEventListener('click', function(event) {
+      const copyText = event.target.dataset.clipboardText;
+      navigator.clipboard.writeText(copyText);
+      event.target.innerHTML = 'Copied!';
+      setTimeout(() => {
+        event.target.innerHTML = 'Copy';
+      }, 1000);
+    });
+  });
+</script>
