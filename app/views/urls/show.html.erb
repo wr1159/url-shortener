@@ -1,6 +1,6 @@
 <div class="flex flex-col item-center justify-center m-auto">
   <a class="text-3xl font-bold mb-8 mx-auto hover:text-gray-500" href="/">Shorten Your URL</a>
-  <div class="grid grid-cols-2 gap-4 shadow-md bg-white rounded-lg mb-8">
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 shadow-md bg-white rounded-lg mb-8">
     <div class="p-4">
       <p class="text-lg font-bold mb-2">Short URL:</p>
       <div class="flex item-center mb-4 justify-between">
@@ -25,7 +25,7 @@
   <div class="bg-gray-100 p-6 rounded-lg w-full">
     <h2 class="text-xl font-semibold ">Visits</h2>
     <h3 class="text-gray-600 mb-4">Time in UTC</h3>
-    <div class="grid grid-cols-3 gap-4">
+    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
       <%= render @url.url_visits%>
     </div>
   </div>
