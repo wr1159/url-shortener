@@ -57,8 +57,15 @@ Run the following
 rake db:migrate
 ```
 
-Deployment instructions
+## Deployment instructions
 Deploy to Railway by signing up and initialise a PostgreSQL item and add your repo onto the application. Add the Environment variables from the PostgreSQL object. 
+
+These include 
+* DATABASE_URL
+* PGDATABASE 
+* PGPASSWORD
+* PGPORT
+* PGUSER
 
 Go to config/environments/production.db 
 and replace 
